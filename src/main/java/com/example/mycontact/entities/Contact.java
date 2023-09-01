@@ -27,13 +27,17 @@ public class Contact {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "phone")
+    private String phone;
+
     public Contact() {
     }
 
-    public Contact(Integer id, String name, String email) {
+    public Contact(Integer id, @NotEmpty @Size(max = 50) String name, @Email String email, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.phone = phone;
     }
 
     public Integer getId() {
@@ -59,5 +63,15 @@ public class Contact {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    
 
 }

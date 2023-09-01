@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"></head>
+  <body>
+    <nav th:replace="layout :: header"></nav>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <form
+            class="form-inline"
+            action="#"
+            th:action="@{/contact/search}"
+            method="get"
+          >
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              name="name"
+              placeholder="Search by name ..."
+            />
+            <button class="btn btn-primary" type="submit">
+              <i class="fa fa-search">Search</i>
+            </button>
+          </form>
+        </div>
+
+        <div class="col-6 no-padding">
+          <a
+            href="#"
+            th:href="@{/contact/add}"
+            class="btn btn-success float-right"
+          >
+            <i class="fa fa-plus-square"></i>New contact
+          </a>
+        </div>
+      </div>
+
+      <!-- <th:block th:if="${lists.isEmpty(contacts)}">
+          <h2>No contacts</h2>
+        </th:block>
+        <th:block th:unless="${lists.isEmpty(contacts)}"> -->
+      <div class="table-container">
+        <table class="contact-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <h2>List of contacts</h2>
+            <tr th:each="contact,iterStat:${contacts}">
+              <th scope="row" th:text="${iterStat.count}"></th>
+              <td th:text="${contact.name}"></td>
+              <td th:text="${contact.email}"></td>
+              <td th:text="${contact.phone}"></td>
+              <td>
+                <a
+                  href="#"
+                  th:href="@{/contact/{id}/edit(id=${contact.id})}"
+                  class="mr-sm2 text-primary"
+                >
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a
+                  href="#"
+                  th:href="@{/contact/{id}/delete(id=${contact.id})}"
+                  class="text-danger"
+                >
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer th:replace="layout :: footer"></footer>
+  </body>
+</html>
