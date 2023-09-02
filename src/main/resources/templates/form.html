@@ -26,7 +26,7 @@
             <em
               th:if="${#fields.hasErrors('name')}"
               style="color: red"
-              th:error="*{name}"
+              th:errors="*{name}"
             ></em>
           </div>
           <div class="form-group">
@@ -40,7 +40,7 @@
             <em
               th:if="${#fields.hasErrors('email')}"
               style="color: red"
-              th:error="*{email}"
+              th:errors="*{email}"
             ></em>
           </div>
           <div class="form-group">

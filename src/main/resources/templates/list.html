@@ -34,49 +34,64 @@
           </a>
         </div>
       </div>
-
-      <!-- <th:block th:if="${lists.isEmpty(contacts)}">
-          <h2>No contacts</h2>
-        </th:block>
-        <th:block th:unless="${lists.isEmpty(contacts)}"> -->
-      <div class="table-container">
-        <table class="contact-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <h2>List of contacts</h2>
-            <tr th:each="contact,iterStat:${contacts}">
-              <th scope="row" th:text="${iterStat.count}"></th>
-              <td th:text="${contact.name}"></td>
-              <td th:text="${contact.email}"></td>
-              <td th:text="${contact.phone}"></td>
-              <td>
-                <a
-                  href="#"
-                  th:href="@{/contact/{id}/edit(id=${contact.id})}"
-                  class="mr-sm2 text-primary"
-                >
-                  <i class="fa fa-pencil"></i>
-                </a>
-                <a
-                  href="#"
-                  th:href="@{/contact/{id}/delete(id=${contact.id})}"
-                  class="text-danger"
-                >
-                  <i class="fa fa-trash"></i>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div
+        th:if="${successMessage}"
+        class="col-12 alert alert-success alert-dismissible fade show"
+        role="alert"
+      >
+        <span th:text="${successMessage}"></span>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true"> &times; </span>
+        </button>
       </div>
+      <th:block th:if="${#lists.isEmpty(contacts)}">
+        <h2>No contacts</h2>
+      </th:block>
+      <th:block th:unless="${#lists.isEmpty(contacts)}">
+        <div class="table-container">
+          <table class="contact-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <h2>List of contacts</h2>
+              <tr th:each="contact,iterStat:${contacts}">
+                <th scope="row" th:text="${iterStat.count}"></th>
+                <td th:text="${contact.name}"></td>
+                <td th:text="${contact.email}"></td>
+                <td th:text="${contact.phone}"></td>
+                <td>
+                  <a
+                    href="#"
+                    th:href="@{/contact/{id}/edit(id=${contact.id})}"
+                    class="mr-sm2 text-primary"
+                  >
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                  <a
+                    href="#"
+                    th:href="@{/contact/{id}/delete(id=${contact.id})}"
+                    class="text-danger"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </th:block>
     </div>
 
     <footer th:replace="layout :: footer"></footer>

@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import com.example.mycontact.entities.Contact;
 import com.example.mycontact.service.ContactService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.util.StringUtils;
@@ -51,4 +52,16 @@ public class ContactController {
         return "redirect:/contact";
     }
 
+    @GetMapping(value = "/contact/{id}/delete")
+    public String delete(@PathVariable int id, RedirectAttributes redirect) {
+        contactService.delete(id);
+        redirect.addFlashAttribute("successMessage", "Deleted contact successfully!");
+        return "redirect:/contact";
+    }
+
+    @GetMapping(value = "/contact/{id}/edit")
+    public String edit(@PathVariable int id, Model model) {
+        model.addAttribute("contact", contactService.findById(id));
+        return "form";
+    }
 }
